@@ -1,21 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container-fluid">
+  <div class="page-background row align-items-center justify-content-center">
+    <div class="col-md-8 card ">
+      <form *ngIf="state===1" [formGroup]="bookingForm">
+        <div class="form-row card-body">
+          <div class="col">
+            <div class="form-group">
+              <label for="destination">Destination</label>
+              <select formControlName="dest" id="destination" class="custom-select">
+                <option value="CMB">Colombo</option>
+                <option value="KDY">Kandy</option>
+                <option value="NEG">Negombo</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md col">
+            <div class="form-group">
+              <label for="vtype">Vehicle Type</label>
+              <select formControlName="vType" id="vtype" class="custom-select">
+                <option value="car">Car</option>
+                <option value="van">Van</option>
+                <option value="bus">Bus</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md col">
+            <div class="form-group">
+              <label for="memNo">No. of Members</label>
+              <select formControlName="members" id="memNo" class="custom-select">
+                <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" value="{{i}}">{{i}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="dur">Duration</label>
+              <select formControlName="dur" id="dur" class="custom-select">
+                <option value="1">1 Day</option>
+                <option value="2">2 Days</option>
+                <option value="3">3 Days</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label id="bookLabel">book</label>
+              <button type="button" (click)="state=2;" class="btn btn-primary btn-block">Book</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div>
+        {{bookingForm.value | json}}
+      </div>
+      <div *ngIf="state===2">
+        <div class="row align-items-center">
+          <h5 class="col-sm-2">Email :</h5>
+          <p class="col-sm-10 summary">{{bookingForm.get('vType').value}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
-<router-outlet></router-outlet>
